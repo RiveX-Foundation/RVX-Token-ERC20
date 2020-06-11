@@ -7,10 +7,10 @@ var FoundationContract = artifacts.require("FoundationContract");
 var PartnerContract = artifacts.require("PartnerContract");
 
 module.exports = function(deployer) {
-  var rvxowner = "0x1506d7a71a502d9b7abfec80a43666295e9fb2eb";
+  var rvxowner = "0xFCa05682C05a7F251d4a36539F4c5E69F3b41bc7";
   var teamcreator = "0x99895bf4aa5055d81851c8fde1bf72c9743169e4";
   var foundationcreator = "0xb15ed1f34c228295a2d32ce6f2e1d3ad9afbca6f";
-  var privatesalecreator = "0x3e651767f098f2b0a0b6f98843aef86a15393db5";
+  var privatesalecreator = "0x22d0ea6Ba8842Ae1355F842a9fAc32F035F18Ca6";
   var ecosystemcreator = "0x1fcd62d5525de15e2dde1aa66fbc7709c6412e79";
   var partnerscreator = "0x288ce10d2afe3f24d99280806c7b87541f49d657";
 
@@ -29,10 +29,10 @@ module.exports = function(deployer) {
   var ecosystemanme = "Ecosystem";
   var partnersname = "Partners";
 
- deployer.deploy(USDT);
+ deployer.deploy(RVXToken,rvxowner);
+ deployer.deploy(PrivateSaleContract,privatesalecreator,beneficiaryplaceholder,unlockdateprivate,privatesalename);
 
  /*deployer.deploy(TeamContract,teamcreator,beneficiaryplaceholder,unlockdateteam,teamname);
- deployer.deploy(PrivateSaleContract,privatesalecreator,beneficiaryplaceholder,unlockdateprivate,privatesalename);
  deployer.deploy(EcosystemContract,ecosystemcreator,beneficiaryplaceholder,unlockdateecosystem,ecosystemanme);
  deployer.deploy(FoundationContract,foundationcreator,beneficiaryplaceholder,unlockdatefoundation,foundationname);
  deployer.deploy(PartnerContract,partnerscreator,beneficiaryplaceholder,unlockdatepartner,partnersname);*/
