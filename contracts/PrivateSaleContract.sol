@@ -81,7 +81,7 @@ contract ERC20 {
     event Transfer(address indexed from, address indexed to, uint256 value);
 }
 
-contract PartnerContract {
+contract PrivateSaleContract {
     using SafeMath
     for uint256;
 
@@ -90,8 +90,36 @@ contract PartnerContract {
     uint256[] public unlockDates;
     uint256 public createdAt;
     string public contractName;
-    uint public counter = 0;
-    uint256 public amountToRelease = 25000000 ether;
+    address public walletOne;
+    address public walletTwo;
+    address public walletThree;
+    address public walletFour;
+    address public walletFive;
+    address public walletSix;
+
+    uint256 public firstOne = 5066666 ether;
+    uint256 public firstTwo = 22705533 ether;
+    uint256 public firstThree = 250000 ether;
+    uint256 public firstFour = 250000 ether;
+    uint256 public firstFive = 1000000 ether;
+    uint256 public firstSix = 8227800 ether;
+
+    uint256 public secondOne = 3040000 ether;
+    uint256 public secondTwo = 13623320 ether;
+    uint256 public secondThree = 150000 ether;
+    uint256 public secondFour = 150000 ether;
+    uint256 public secondFive = 600000 ether;
+    uint256 public secondSix = 4936680 ether;
+
+    uint public counterOne = 0;
+    uint public counterTwo = 0;
+    uint public counterThree = 0;
+    uint public counterFour = 0;
+    uint public counterFive = 0;
+    uint public counterSix = 0;
+
+
+
 
     modifier onlyOwner {
         require(msg.sender == owner);
@@ -102,7 +130,7 @@ contract PartnerContract {
         require(msg.sender == creator);
         _;
     }
-    
+
     constructor(
         address _creator,
         address _owner,
@@ -121,19 +149,24 @@ contract PartnerContract {
         emit Received(msg.sender, msg.value);
     }
     
-    function changeBeneficiary(address _address) onlyCreator public {
+       function changeBeneficiary(address _address) onlyCreator public {
         owner = _address;
         
     }
 
-    // callable by owner only, after specified time
-    function withdraw() onlyOwner public {
-        require(now >= unlockDates[counter]);
-        msg.sender.transfer(address(this).balance);
-        counter++;
-        emit Withdrew(msg.sender, address(this).balance);
+    function setWallets(address _walletone, address _wallettwo, address _walletthree, address _walletfour, address _walletfive, address _walletsix) onlyCreator public {
+
+        walletOne = _walletone;
+        walletTwo = _wallettwo;
+        walletThree = _walletthree;
+        walletFour = _walletfour;
+        walletFive = _walletfive;
+        walletSix = _walletsix;
 
     }
+
+
+
 
     function emergencyToken(address _tokenContract) onlyCreator public {
 
@@ -150,12 +183,94 @@ contract PartnerContract {
     }
 
     // callable by owner only, after specified time, only for Tokens implementing ERC20
-    function withdrawTokens(address _tokenContract) onlyCreator public {
-        require(now >= unlockDates[counter]);
+    function withdrawTokensWalletOne(address _tokenContract) onlyCreator  public {
+        require(now >= unlockDates[counterOne]);
         ERC20 token = ERC20(_tokenContract);
-        token.transfer(owner, amountToRelease);
-        counter++;
-        emit WithdrewTokens(_tokenContract, msg.sender, amountToRelease);
+        if (counterOne >= 1) {
+            token.transfer(walletOne, secondOne);
+            counterOne++;
+            emit WithdrewTokens(_tokenContract, msg.sender, secondOne);
+        } else {
+            token.transfer(walletOne, firstOne);
+            counterOne++;
+            emit WithdrewTokens(_tokenContract, msg.sender, firstOne);
+        }
+
+    }
+
+    function withdrawTokensWalletTwo(address _tokenContract) onlyCreator public {
+        require(now >= unlockDates[counterTwo]);
+        ERC20 token = ERC20(_tokenContract);
+        if (counterTwo >= 1) {
+            token.transfer(walletTwo, secondTwo);
+            counterTwo++;
+            emit WithdrewTokens(_tokenContract, msg.sender, secondTwo);
+        } else {
+            token.transfer(walletTwo, firstTwo);
+            counterTwo++;
+            emit WithdrewTokens(_tokenContract, msg.sender, firstTwo);
+        }
+
+    }
+
+    function withdrawTokensWalletThree(address _tokenContract) onlyCreator public {
+        require(now >= unlockDates[counterThree]);
+        ERC20 token = ERC20(_tokenContract);
+        if (counterThree >= 1) {
+            token.transfer(walletThree, secondThree);
+            counterThree++;
+            emit WithdrewTokens(_tokenContract, msg.sender, secondThree);
+        } else {
+            token.transfer(walletThree, firstThree);
+            counterThree++;
+            emit WithdrewTokens(_tokenContract, msg.sender, firstThree);
+        }
+
+    }
+
+    function withdrawTokensWalletFour(address _tokenContract) onlyCreator public {
+        require(now >= unlockDates[counterFour]);
+        ERC20 token = ERC20(_tokenContract);
+        if (counterFour >= 1) {
+            token.transfer(walletFour, secondFour);
+            counterFour++;
+            emit WithdrewTokens(_tokenContract, msg.sender, secondFour);
+        } else {
+            token.transfer(walletFour, firstFour);
+            counterFour++;
+            emit WithdrewTokens(_tokenContract, msg.sender, firstFour);
+        }
+
+    }
+
+    function withdrawTokensWalletFive(address _tokenContract) onlyCreator public {
+        require(now >= unlockDates[counterFive]);
+        ERC20 token = ERC20(_tokenContract);
+        if (counterFive >= 1) {
+            token.transfer(walletFive, secondFive);
+            counterFive++;
+            emit WithdrewTokens(_tokenContract, msg.sender, secondFive);
+        } else {
+            token.transfer(walletFive, firstFive);
+            counterFive++;
+            emit WithdrewTokens(_tokenContract, msg.sender, firstFive);
+        }
+
+    }
+
+    function withdrawTokensWalletSix(address _tokenContract) onlyCreator public {
+        require(now >= unlockDates[counterSix]);
+        ERC20 token = ERC20(_tokenContract);
+        if (counterSix >= 1) {
+            token.transfer(walletSix, secondSix);
+            counterSix++;
+            emit WithdrewTokens(_tokenContract, msg.sender, secondSix);
+        } else {
+            token.transfer(walletSix, firstSix);
+            counterSix++;
+            emit WithdrewTokens(_tokenContract, msg.sender, firstSix);
+        }
+
     }
 
     function info() public view returns(address, address, uint256[], uint256, uint256) {
